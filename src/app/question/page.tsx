@@ -35,14 +35,14 @@ export default function Question() {
           <Stack spacing={4}>
             <Box>
             <Heading size="3">Questão 1</Heading>
-            <Text>Escolha a palavra em inglês que melhor se traduz para a palavra em português:</Text>
+            <Text>Escolha a palavra em inglês que melhor se traduz para a palavra em português: "Pequeno".</Text>
             </Box>
             <RadioGroup onChange={setAlternativa} value={alternativa}>
               <Stack direction='column' gap={4}>
-                <Radio value='1' borderColor='gray.400'>A) pequeno</Radio>
+                <Radio value='1' borderColor='gray.400'>A) big </Radio>
                 <Radio value='2' borderColor='gray.400'>B) little</Radio>
-                <Radio value='3' borderColor='gray.400'>C) big</Radio>
-                <Radio value='4' borderColor='gray.400'>D) medium</Radio>
+                <Radio value='3' borderColor='gray.400'>C) medium</Radio>
+                <Radio value='4' borderColor='gray.400'>D) old</Radio>
               </Stack>
             </RadioGroup>
           </Stack>
@@ -50,7 +50,7 @@ export default function Question() {
 
         {/*Fim questões*/}
 
-        
+
       </Stack>
     </Container>
   );
