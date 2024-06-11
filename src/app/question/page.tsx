@@ -22,7 +22,7 @@ export default function Question() {
   return (
     <Container display='flex' alignItems='center' justifyContent='center'>
 
-      <Stack spacing={2} m={16}>
+      <Stack spacing={2} m={8}>
 
         <Box marginBottom={4}>
           <Heading size="3" textAlign='center'>Teste Prático Inglês Intermediário</Heading>
