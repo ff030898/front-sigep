@@ -26,10 +26,16 @@ import {
   Wrap,
   Avatar,
   Checkbox,
+  Button,
+  Tag,
+  TagLabel,
+  HStack,
+  TagCloseButton,
+  Textarea,
 } from '@chakra-ui/react'
 
 
-import { BsBox2Heart, BsTrashFill } from "react-icons/bs";
+import { BsPlusCircle, BsTrashFill, BsFilePdf } from "react-icons/bs";
 
 export default function Home() {
 
@@ -47,6 +53,63 @@ export default function Home() {
   const [identidadeGenero, setIdentidadeGenero] = React.useState('1');
   const [orientacao, setOrientacao] = React.useState('3');
   const [cor, setCor] = React.useState('1');
+
+  const [experienciaList, setExperienciaList] = React.useState(1);
+  const [academicaList, setAcademicaList] = React.useState<any[]>([1]);
+  const [habilidadesList, setHabilidadesList] = React.useState(1);
+  const [idiomasList, setIdiomasList] = React.useState(1);
+  const [conquistasList, setConquistasList] = React.useState(1);
+
+  function handleAddExperiencia() {
+    setExperienciaList(experienciaList + 1);
+  }
+
+  function handleRemoveExperiencia() {
+    setExperienciaList(experienciaList - 1);
+  }
+
+  function handleAddAcademica() {
+    setAcademicaList([...academicaList, academicaList.length + 1]);
+    console.log(academicaList.length)
+  }
+
+  function handleRemoveAcademica() {
+
+    console.log(academicaList.length);
+
+    const indexList = academicaList.length;
+
+    if (indexList > 1) {
+      setAcademicaList(l => l.filter(item => item !== indexList));
+    } else {
+      // Limpar campos
+    }
+
+  }
+
+  function handleAddHabilidades() {
+    setHabilidadesList(habilidadesList + 1);
+  }
+
+  function handleRemoveHabilidades() {
+    setHabilidadesList(habilidadesList - 1);
+  }
+
+  function handleAddIdioma() {
+    setIdiomasList(idiomasList + 1);
+  }
+
+  function handleRemoveIdioma() {
+    setIdiomasList(idiomasList - 1);
+  }
+
+  function handleAddConquista() {
+    setConquistasList(conquistasList + 1);
+  }
+
+  function handleRemoveConquista() {
+    setConquistasList(conquistasList - 1);
+  }
 
   const handleInputChangeNome = (e: any) => setNome(e.target.value);
   const handleInputChangeSobrenome = (e: any) => setSobrenome(e.target.value);
@@ -254,133 +317,144 @@ export default function Home() {
                   <Stack spacing={8} />
                   <Stack spacing={8} />
                   <Stack spacing={8} />
-                  <Heading as='h6' size='xs'>
-                    Experiência acadêmica 1
-                  </Heading>
+                  {/*Mapear List com Map*/}
+
+                  {academicaList.map((item, index) => {
+                    return (
+                      <Stack key={index} mt={4}>
+                        <Heading as='h6' size='xs'>
+                          Experiência acadêmica {item}
+                        </Heading>
+
+                        <Grid templateColumns='repeat(2, 1fr)' gap={6}>
+                          <GridItem w='100%'>
+                            <Stack spacing={2}>
+                              <Text fontSize='xs'>Formação*</Text>
+                              <Select borderColor='gray.400'>
+                                <option value='option1'>Fundamental</option>
+                                <option value='option2'>Médio</option>
+                                <option value='option3'>Técnico</option>
+                                <option value='option3'>Superior</option>
+                              </Select>
+                            </Stack>
+                          </GridItem>
+                          <GridItem w='100%'>
+                            <Stack spacing={2}>
+                              <Text fontSize='xs'>Grau*</Text>
+                              <Select borderColor='gray.400'>
+                                <option value='option1'>Fundamental</option>
+                                <option value='option2'>Médio</option>
+                                <option value='option3'>Técnico</option>
+                                <option value='option3'>Superior</option>
+                              </Select>
+                            </Stack>
+                          </GridItem>
+                        </Grid>
+
+                        <Stack spacing={8} />
+
+                        <Grid templateColumns='repeat(2, 1fr)' gap={6}>
+                          <GridItem w='100%'>
+                            <Stack spacing={2}>
+                              <Text fontSize='xs'>Status*</Text>
+                              <Select borderColor='gray.400'>
+                                <option value='option1'>Fundamental</option>
+                                <option value='option2'>Médio</option>
+                                <option value='option3'>Técnico</option>
+                                <option value='option3'>Superior</option>
+                              </Select>
+                            </Stack>
+                          </GridItem>
+                          <GridItem w='100%'>
+                            <Stack spacing={2}>
+                              <Text fontSize='xs'>Curso*</Text>
+                              <Select borderColor='gray.400'>
+                                <option value='option1'>Fundamental</option>
+                                <option value='option2'>Médio</option>
+                                <option value='option3'>Técnico</option>
+                                <option value='option3'>Superior</option>
+                              </Select>
+                            </Stack>
+                          </GridItem>
+                        </Grid>
+
+                        <Stack spacing={8} />
+
+                        <Grid templateColumns='repeat(4, 1fr)' gap={6}>
+                          <GridItem w='100%'>
+                            <Stack spacing={2}>
+                              <Text fontSize='xs'>Inicio*</Text>
+                              <Select borderColor='gray.400'>
+                                <option value="1">Janeiro</option>
+                                <option value="2">Fevereiro</option>
+                                <option value="3">Março</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Maio</option>
+                                <option value="6">Junho</option>
+                                <option value="7">Julho</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                              </Select>
+                            </Stack>
+                          </GridItem>
+                          <GridItem w='100%'>
+                            <Stack spacing={2}>
+                              <Text fontSize='xs'>&nbsp;</Text>
+                              <Select borderColor='gray.400'>
+                                <option value="1">2024</option>
+                              </Select>
+                            </Stack>
+                          </GridItem>
+
+                          <GridItem w='100%'>
+                            <Stack spacing={2}>
+                              <Text fontSize='xs'>Fim*</Text>
+                              <Select borderColor='gray.400'>
+                                <option value="1">Janeiro</option>
+                                <option value="2">Fevereiro</option>
+                                <option value="3">Março</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Maio</option>
+                                <option value="6">Junho</option>
+                                <option value="7">Julho</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                              </Select>
+                            </Stack>
+                          </GridItem>
+
+                          <GridItem w='100%'>
+                            <Stack spacing={2}>
+                              <Text fontSize='xs'>&nbsp;</Text>
+                              <Select borderColor='gray.400'>
+                                <option value="1">2024</option>
+                              </Select>
+                            </Stack>
+                          </GridItem>
+                        </Grid>
 
 
+                        <Stack spacing={8} />
 
-                  <Grid templateColumns='repeat(2, 1fr)' gap={6}>
-                    <GridItem w='100%'>
-                      <Stack spacing={2}>
-                        <Text fontSize='xs'>Formação*</Text>
-                        <Select borderColor='gray.400'>
-                          <option value='option1'>Fundamental</option>
-                          <option value='option2'>Médio</option>
-                          <option value='option3'>Técnico</option>
-                          <option value='option3'>Superior</option>
-                        </Select>
                       </Stack>
-                    </GridItem>
-                    <GridItem w='100%'>
-                      <Stack spacing={2}>
-                        <Text fontSize='xs'>Grau*</Text>
-                        <Select borderColor='gray.400'>
-                          <option value='option1'>Fundamental</option>
-                          <option value='option2'>Médio</option>
-                          <option value='option3'>Técnico</option>
-                          <option value='option3'>Superior</option>
-                        </Select>
-                      </Stack>
-                    </GridItem>
-                  </Grid>
+                    )
+                  })}
 
-                  <Stack spacing={8} />
-
-                  <Grid templateColumns='repeat(2, 1fr)' gap={6}>
-                    <GridItem w='100%'>
-                      <Stack spacing={2}>
-                        <Text fontSize='xs'>Status*</Text>
-                        <Select borderColor='gray.400'>
-                          <option value='option1'>Fundamental</option>
-                          <option value='option2'>Médio</option>
-                          <option value='option3'>Técnico</option>
-                          <option value='option3'>Superior</option>
-                        </Select>
-                      </Stack>
-                    </GridItem>
-                    <GridItem w='100%'>
-                      <Stack spacing={2}>
-                        <Text fontSize='xs'>Curso*</Text>
-                        <Select borderColor='gray.400'>
-                          <option value='option1'>Fundamental</option>
-                          <option value='option2'>Médio</option>
-                          <option value='option3'>Técnico</option>
-                          <option value='option3'>Superior</option>
-                        </Select>
-                      </Stack>
-                    </GridItem>
-                  </Grid>
-
-                  <Stack spacing={8} />
-
-                  <Grid templateColumns='repeat(4, 1fr)' gap={6}>
-                    <GridItem w='100%'>
-                      <Stack spacing={2}>
-                        <Text fontSize='xs'>Inicio*</Text>
-                        <Select borderColor='gray.400'>
-                          <option value="1">Janeiro</option>
-                          <option value="2">Fevereiro</option>
-                          <option value="3">Março</option>
-                          <option value="4">Abril</option>
-                          <option value="5">Maio</option>
-                          <option value="6">Junho</option>
-                          <option value="7">Julho</option>
-                          <option value="8">Agosto</option>
-                          <option value="9">Setembro</option>
-                          <option value="10">Outubro</option>
-                          <option value="11">Novembro</option>
-                          <option value="12">Dezembro</option>
-                        </Select>
-                      </Stack>
-                    </GridItem>
-                    <GridItem w='100%'>
-                      <Stack spacing={2}>
-                        <Text fontSize='xs'>&nbsp;</Text>
-                        <Select borderColor='gray.400'>
-                          <option value="1">2024</option>
-                        </Select>
-                      </Stack>
-                    </GridItem>
-
-                    <GridItem w='100%'>
-                      <Stack spacing={2}>
-                        <Text fontSize='xs'>Fim*</Text>
-                        <Select borderColor='gray.400'>
-                          <option value="1">Janeiro</option>
-                          <option value="2">Fevereiro</option>
-                          <option value="3">Março</option>
-                          <option value="4">Abril</option>
-                          <option value="5">Maio</option>
-                          <option value="6">Junho</option>
-                          <option value="7">Julho</option>
-                          <option value="8">Agosto</option>
-                          <option value="9">Setembro</option>
-                          <option value="10">Outubro</option>
-                          <option value="11">Novembro</option>
-                          <option value="12">Dezembro</option>
-                        </Select>
-                      </Stack>
-                    </GridItem>
-
-                    <GridItem w='100%'>
-                      <Stack spacing={2}>
-                        <Text fontSize='xs'>&nbsp;</Text>
-                        <Select borderColor='gray.400'>
-                          <option value="1">2024</option>
-                        </Select>
-                      </Stack>
-                    </GridItem>
-                  </Grid>
-
-
-                  <Stack spacing={8} />
-
+                  <Link onClick={handleRemoveAcademica} isExternal color='blue' display='flex' alignItems='center' alignContent='center' marginTop='1.5rem' mb={8}>
+                    <BsTrashFill size={16} color='blue' /> <Text marginX={2} size='sx'>Remover formação </Text>
+                  </Link>
 
                 </Stack>
 
-                <Link href='#' isExternal color='blue' display='flex' alignItems='center' alignContent='center' marginTop='1.5rem' mb={16}>
-                  <BsTrashFill size={16} color='blue' /> <Text marginX={2} size='sx'>Remover formação </Text>
+
+                <Link onClick={handleAddAcademica} isExternal color='blue' display='flex' alignItems='center' alignContent='center' marginTop='1.5rem' mb={16} borderWidth='2px' borderStyle='dashed' borderColor='gray.400' p={2} borderRadius={8}>
+                  <BsPlusCircle size={16} color='blue' /> <Text marginX={2} size='sx'>Adicionar outra formação acadêmica </Text>
                 </Link>
 
 
@@ -493,6 +567,12 @@ export default function Home() {
 
                 <Link href='#' isExternal color='blue' display='flex' alignItems='center' alignContent='center' marginTop='1.5rem'>
                   <BsTrashFill size={16} color='blue' /> <Text marginX={2} size='sx'>Remover experiência </Text>
+                </Link>
+
+                <Stack spacing={8} />
+
+                <Link href='#' isExternal color='blue' display='flex' alignItems='center' alignContent='center' marginTop='1.5rem' mb={2} borderWidth='2px' borderStyle='dashed' borderColor='gray.400' p={2} borderRadius={8}>
+                  <BsPlusCircle size={16} color='blue' /> <Text marginX={2} size='sx'>Adicionar outra experiência profissional </Text>
                 </Link>
 
               </AccordionPanel>
@@ -646,13 +726,169 @@ export default function Home() {
                   <Text fontSize='xs'>Você pode informar até 30 habilidades que possui.</Text>
                   <Stack spacing={2} />
                   <Text fontSize='xs'>Habilidade (opcional)</Text>
-                  <Input borderColor='gray.400' rounded='lg' />
+
+
+                  <FormControl isRequired marginBottom={6}>
+                    <Stack spacing={2}>
+                      <Box display='flex' gap={6} w='100%'>
+                        <Box w='150%'>
+                          <Input borderColor='gray.400' rounded='lg' />
+                        </Box>
+
+
+                        <Box w='30%'>
+                          <Button colorScheme='teal' size='md'>
+                            Adicionar
+                          </Button>
+                        </Box>
+                      </Box>
+                    </Stack>
+
+                  </FormControl>
+
+                  <HStack spacing={4}>
+
+                    <Tag
+                      size='md'
+                      key='md'
+                      borderRadius='full'
+                      variant='solid'
+                      colorScheme='blue'
+                    >
+                      <TagLabel>Javascript</TagLabel>
+                      <TagCloseButton />
+                    </Tag>
+
+                  </HStack>
                 </Stack>
 
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
           {/* Fim Habilidades */}
+
+
+          {/* Inicio Idiomas */}
+          <Accordion defaultIndex={[0]} allowMultiple p={8}>
+            <AccordionItem border='1px' borderColor='gray.400' rounded='lg' p={6}>
+              <h2>
+                <AccordionButton>
+                  <Box as='span' flex='1' textAlign='left'>
+                    <Heading size="3">Idiomas</Heading>
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel>
+
+                <Stack spacing={2} pb={4}>
+                  <Text fontSize='xs'>Selecione todos os idiomas que você tem dominio.</Text>
+                  <Stack spacing={2} />
+                  <Heading as='h6' size='xs'>
+                    Idioma 1
+                  </Heading>
+
+                  <Grid templateColumns='repeat(2, 1fr)' gap={6}>
+                    <GridItem w='100%'>
+                      <Stack spacing={2}>
+                        <Text fontSize='xs'>Idioma</Text>
+                        <Select borderColor='gray.400'>
+                          <option value="1">Inglês</option>
+                          <option value="2">Espanhol</option>
+                          <option value="3">Português</option>
+                        </Select>
+                      </Stack>
+                    </GridItem>
+                    <GridItem w='100%'>
+                      <Stack spacing={2}>
+                        <Text fontSize='xs'>Nível *</Text>
+                        <Select borderColor='gray.400'>
+                          <option value="1">Básico</option>
+                          <option value="2">Intermediário</option>
+                          <option value="3">Avançado</option>
+                          <option value="3">Fluente</option>
+                        </Select>
+                      </Stack>
+                    </GridItem>
+                  </Grid>
+
+                  <Link href='#' isExternal color='blue' display='flex' alignItems='center' alignContent='center' marginTop='1.5rem' mb={2}>
+                    <BsTrashFill size={16} color='blue' /> <Text marginX={2} size='sx'>Remover Idioma </Text>
+                  </Link>
+
+                  <Link href='#' isExternal color='blue' display='flex' alignItems='center' alignContent='center' marginTop='1.5rem' mb={2} borderWidth='2px' borderStyle='dashed' borderColor='gray.400' p={2} borderRadius={8}>
+                    <BsPlusCircle size={16} color='blue' /> <Text marginX={2} size='sx'>Adicionar outro idioma </Text>
+                  </Link>
+
+                </Stack>
+
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+          {/* Fim Idiomas */}
+
+
+          {/* Conquistas ou certificado */}
+          <Accordion defaultIndex={[0]} allowMultiple p={8}>
+            <AccordionItem border='1px' borderColor='gray.400' rounded='lg' p={6}>
+              <h2>
+                <AccordionButton>
+                  <Box as='span' flex='1' textAlign='left'>
+                    <Heading size="3">Conquistas ou certificados</Heading>
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel>
+
+                <Stack spacing={2} pb={4}>
+                  <Text fontSize='xs'>Você pode informar sobre cursos, trabalhos voluntários e outros reconhecimentos.</Text>
+                  <Stack spacing={2} />
+                  <Heading as='h6' size='xs'>
+                    Conquista ou certificado 1
+                  </Heading>
+
+                  <Grid templateColumns='repeat(2, 1fr)' gap={6} mb={4}>
+                    <GridItem w='100%'>
+                      <Stack spacing={2}>
+                        <Text fontSize='xs'>Conquista ou certificado *</Text>
+                        <Select borderColor='gray.400'>
+                          <option value="1">Curso</option>
+                          <option value="2">Trabalho voluntário</option>
+                          <option value="3">Especialização</option>
+                        </Select>
+                      </Stack>
+                    </GridItem>
+                    <GridItem w='100%'>
+                      <Stack spacing={2}>
+                        <Text fontSize='xs'>Título *</Text>
+                        <Input type='text' borderColor='gray.400' />
+
+                      </Stack>
+                    </GridItem>
+                  </Grid>
+
+                  <Stack spacing={2}>
+                    <Text fontSize='xs'>Descrição: </Text>
+                    <Textarea placeholder='' borderColor='gray.400' />
+
+                  </Stack>
+
+                  <Link href='#' isExternal color='blue' display='flex' alignItems='center' alignContent='center' marginTop='1.5rem' mb={2}>
+                    <BsTrashFill size={16} color='blue' /> <Text marginX={2} size='sx'>Remover conquista ou certificado </Text>
+                  </Link>
+
+                  <Link href='#' isExternal color='blue' display='flex' alignItems='center' alignContent='center' marginTop='1.5rem' mb={2} borderWidth='2px' borderStyle='dashed' borderColor='gray.400' p={2} borderRadius={8}>
+                    <BsPlusCircle size={16} color='blue' /> <Text marginX={2} size='sx'>Adicionar outra conquista ou certificado </Text>
+                  </Link>
+
+                </Stack>
+
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+          {/* Fim Conquistas ou certificado */}
+
 
         </GridItem>
 
@@ -674,6 +910,12 @@ export default function Home() {
                 </Stack>
               </Container>
 
+              <Container >
+                <Stack spacing={4} display='flex' alignItems='center' justifyContent='center' mt={8}>
+                  <BsFilePdf size={32} />
+                  <Input type='file' />
+                </Stack>
+              </Container>
 
 
             </CardBody>
