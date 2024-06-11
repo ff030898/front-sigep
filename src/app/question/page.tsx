@@ -4,8 +4,6 @@ import {
   Container,
   Box,
   Text,
-  Card,
-  CardBody,
   Heading,
   Stack,
   RadioGroup,
@@ -35,7 +33,7 @@ export default function Question() {
           <Stack spacing={4}>
             <Box>
             <Heading size="3">Questão 1</Heading>
-            <Text>Escolha a palavra em inglês que melhor se traduz para a palavra em português: "Pequeno".</Text>
+            <Text>Escolha a palavra em inglês que melhor se traduz para a palavra em português: Pequeno.</Text>
             </Box>
             <RadioGroup onChange={setAlternativa} value={alternativa}>
               <Stack direction='column' gap={4}>
