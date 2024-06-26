@@ -7,13 +7,14 @@ import {
 
 } from '@chakra-ui/react'
 
-export default function Home() {
+
+export default function Prova() {
 
   return (
     <Container display='flex' alignItems='center' justifyContent='center'>
 
      <Box>
-        <Text>Landing Page</Text>
+        <Text>Lista de Provas práticas cadastradas no Dashboard da Empresa</Text>
      </Box>
     </Container>
   );

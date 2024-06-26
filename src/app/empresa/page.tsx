@@ -7,13 +7,14 @@ import {
 
 } from '@chakra-ui/react'
 
-export default function Home() {
+
+export default function Login() {
 
   return (
     <Container display='flex' alignItems='center' justifyContent='center'>
 
      <Box>
-        <Text>Landing Page</Text>
+        <Text>Login da Empresa</Text>
      </Box>
     </Container>
   );

@@ -14,9 +14,11 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "framer-motion": "^11.2.10",
+    "fs": "^0.0.1-security",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.52.0",
     "react-icons": "^5.2.1"
   },
   "devDependencies": {
@@ -26,5 +28,10 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "typescript": "^5"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }

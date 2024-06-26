@@ -13,7 +13,7 @@ import {
 
 
 
-export default function Question() {
+export default function Prova() {
 
   const [alternativa, setAlternativa] = React.useState('0');
 
@@ -47,7 +47,6 @@ export default function Question() {
         </Box>
 
         {/*Fim questões*/}
-
 
       </Stack>
     </Container>
