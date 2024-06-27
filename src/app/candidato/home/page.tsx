@@ -1,9 +1,8 @@
 'use client'
 import React from 'react'
 import {
-  Container,
-  Box,
-  Text
+  GridItem,
+  Grid
 
 } from '@chakra-ui/react'
 import Header from '@/components/header';
@@ -14,15 +13,27 @@ import Footer from '@/components/footer';
 export default function Home() {
 
   return (
-    <Box>
-      <Header />
-      <MenuLeft />
-      <Container display='flex' alignItems='center' justifyContent='center'>
-
-        <Text>Home do Dashboard do Candidato</Text>
-
-      </Container>
-      <Footer />
-    </Box>
+    <Grid
+      templateAreas={`"nav header"
+                  "nav main"
+                  "nav footer"`}
+      gridTemplateRows={'60px 1fr 55px'}
+      gridTemplateColumns={'60px 1fr'}
+      h='100vh'
+      gap='0'
+    >
+      <GridItem pl='2' bg='white' area={'header'} borderBottom='1px solid #ddd'>
+        <Header title='Home'/>
+      </GridItem>
+      <GridItem pl='2' bg='teal.800' area={'nav'}>
+        <MenuLeft />
+      </GridItem>
+      <GridItem pl='2' bg='gray.50' area={'main'} px={10} py={6}>
+        Bem vindo, ao Guiari RH.
+      </GridItem>
+      <GridItem pl='2' bg='teal.800' area={'footer'}>
+        <Footer />
+      </GridItem>
+    </Grid>
   );
 }
