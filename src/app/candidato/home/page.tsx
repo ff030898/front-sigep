@@ -6,16 +6,23 @@ import {
   Text
 
 } from '@chakra-ui/react'
+import Header from '@/components/header';
+import MenuLeft from '@/components/menuLeft';
+import Footer from '@/components/footer';
 
 
 export default function Home() {
 
   return (
-    <Container display='flex' alignItems='center' justifyContent='center'>
+    <Box>
+      <Header />
+      <MenuLeft />
+      <Container display='flex' alignItems='center' justifyContent='center'>
 
-     <Box>
         <Text>Home do Dashboard do Candidato</Text>
-     </Box>
-    </Container>
+
+      </Container>
+      <Footer />
+    </Box>
   );
 }
