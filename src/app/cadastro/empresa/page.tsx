@@ -13,7 +13,8 @@ import NextLink from 'next/link';
 
 const schema = z.object({
   nome: z.string().min(1, "Nome é obrigatório"),
-  telefoneCelular: z.string().min(1, "Telefone celular é obrigatório"),
+  telefoneCelular: z.string().min(1, "Telefone é obrigatório"),
+  cnpj: z.string().min(1, "CNPJ é obrigatório"),
   email: z.string().email("E-mail inválido").min(1, "E-mail é obrigatório"),
   senha: z.string().min(8, "Senha deve ter pelo menos 8 caracteres")
     .regex(/[A-Z]/, "Senha deve ter pelo menos uma letra maiúscula")
@@ -26,7 +27,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const CadastroCandidato: React.FC = () => {
+const CadastroEmpresa: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema)
   });
@@ -39,11 +40,9 @@ const CadastroCandidato: React.FC = () => {
     console.log("Enviando dados para o backend:", data);
 
     try {
-      const response = await axios.post("http://[::1]:3001/candidatos", data, {
-
-      });
+      const response = await axios.post("http://[::1]:3001/empresas", data, {});
       setModalTitle('Sucesso');
-      setModalMessage(`Cadastro realizado com sucesso! ID do candidato: ${response.data.id}`);
+      setModalMessage(`Cadastro realizado com sucesso! ID da empresa: ${response.data.id}`);
       onOpen();
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -86,9 +85,14 @@ const CadastroCandidato: React.FC = () => {
               <Text color="red.500">{errors.nome?.message}</Text>
             </FormControl>
             <FormControl isInvalid={!!errors.telefoneCelular}>
-              <FormLabel>Telefone celular</FormLabel>
+              <FormLabel>Telefone</FormLabel>
               <Input placeholder="+55 11 9 38889-2222" {...register("telefoneCelular")} />
               <Text color="red.500">{errors.telefoneCelular?.message}</Text>
+            </FormControl>
+            <FormControl isInvalid={!!errors.cnpj}>
+              <FormLabel>CNPJ</FormLabel>
+              <Input placeholder="00.000.000/0000-00" {...register("cnpj")} />
+              <Text color="red.500">{errors.cnpj?.message}</Text>
             </FormControl>
             <FormControl isInvalid={!!errors.email}>
               <FormLabel>E-mail</FormLabel>
@@ -97,7 +101,7 @@ const CadastroCandidato: React.FC = () => {
             </FormControl>
             <FormControl isInvalid={!!errors.senha}>
               <FormLabel>Senha</FormLabel>
-              <Input type="password" placeholder="Senha" {...register("senha")} />
+              <Input type="password" placeholder="Insira uma senha" {...register("senha")} />
               <Text color="red.500">{errors.senha?.message}</Text>
             </FormControl>
             <Box bg="gray.800" color="white" p={3} borderRadius="md" mb={4}>
@@ -157,4 +161,4 @@ const CadastroCandidato: React.FC = () => {
   );
 };
 
-export default CadastroCandidato;
+export default CadastroEmpresa;
