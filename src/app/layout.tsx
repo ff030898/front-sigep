@@ -2,8 +2,8 @@ import { Providers } from './providers'
 import { fonts } from './fonts'
 
 export const metadata = {
-  title: 'Rh',
-  description: 'Sigep',
+  title: 'Guiari RH',
+  description: 'Guiari',
 }
 
 export default function RootLayout({

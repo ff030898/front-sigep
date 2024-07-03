@@ -2,15 +2,19 @@
 import React from 'react'
 import {
   GridItem,
-  Grid
+  Grid,
+  Container,
+  Text,
+  Stack
 
 } from '@chakra-ui/react'
 import Header from '@/components/header';
 import MenuLeft from '@/components/menuLeft';
 import Footer from '@/components/footer';
+import CardComponent from '@/components/card';
 
 
-export default function Home() {
+export default function Testes() {
 
   return (
     <Grid
@@ -23,13 +27,18 @@ export default function Home() {
       gap='0'
     >
       <GridItem pl='2' bg='white' area={'header'} borderBottom='1px solid #ddd'>
-        <Header title='Home'/>
+        <Header title=' ' />
       </GridItem>
       <GridItem pl='2' bg='teal.800' area={'nav'}>
         <MenuLeft />
       </GridItem>
       <GridItem pl='2' bg='gray.50' area={'main'} px={10} py={6}>
-        Bem vindo, ao Guiari RH.
+        <Container>
+          <Stack spacing={3}>
+            <Text fontWeight='600'>Meus testes</Text>
+            <CardComponent color='teal.800' />
+          </Stack>
+        </Container>
       </GridItem>
       <GridItem pl='2' bg='teal.800' area={'footer'}>
         <Footer />
