@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import {
   ChakraProvider, Box, VStack, Text, Button, Center, FormControl, FormLabel,
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Input, Link as ChakraLink, Image
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, Input, Link as ChakraLink, Image, Flex
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +13,7 @@ import NextLink from 'next/link';
 
 const schema = z.object({
   nome: z.string().min(1, "Nome é obrigatório"),
-  telefoneCelular: z.string().min(1, "Telefone é obrigatório"),
+  telefoneCelular: z.string().min(1, "Telefone celular é obrigatório"),
   cnpj: z.string().min(1, "CNPJ é obrigatório"),
   email: z.string().email("E-mail inválido").min(1, "E-mail é obrigatório"),
   senha: z.string().min(8, "Senha deve ter pelo menos 8 caracteres")
@@ -66,7 +66,7 @@ const CadastroEmpresa: React.FC = () => {
           alignItems="center"
           width={{ base: "100%", md: "50%" }}
           bg="white"
-          p={8}
+          p={{ base: 4, md: 8 }}
           boxShadow="lg"
           minHeight="100vh"
         >
@@ -85,7 +85,7 @@ const CadastroEmpresa: React.FC = () => {
               <Text color="red.500">{errors.nome?.message}</Text>
             </FormControl>
             <FormControl isInvalid={!!errors.telefoneCelular}>
-              <FormLabel>Telefone</FormLabel>
+              <FormLabel>Telefone celular</FormLabel>
               <Input placeholder="+55 11 9 38889-2222" {...register("telefoneCelular")} />
               <Text color="red.500">{errors.telefoneCelular?.message}</Text>
             </FormControl>
@@ -118,7 +118,7 @@ const CadastroEmpresa: React.FC = () => {
             <Button colorScheme="orange" type="submit" width="100%">
               Criar Conta
             </Button>
-            <Text fontSize={{ base: "xx-small", md: "xs" }} textAlign="center" mt={4}>
+            <Text fontSize={{ base: "xx-small", md: "xs" }} textAlign="center" mt={4} mb={4}>
               Ao usar este site, você concorda com nossos <ChakraLink as={NextLink} color="blue.500" href="#">Termos de Serviço</ChakraLink> e <ChakraLink as={NextLink} color="blue.500" href="#">Política de Privacidade</ChakraLink>.
             </Text>
           </VStack>
@@ -126,11 +126,12 @@ const CadastroEmpresa: React.FC = () => {
 
         <Box
           width={{ base: "100%", md: "50%" }}
-          height="100%"
+          height={{ base: "40vh", md: "100vh" }}
           display="flex"
           justifyContent="center"
           alignItems="center"
           bg="orange.100"
+          mt={{ base: 4, md: 0 }}
         >
           <Image
             src="/imagens/frameLateralCadastro.png"
