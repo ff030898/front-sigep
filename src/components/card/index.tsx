@@ -31,7 +31,7 @@ export default function CardComponent({ title, description, color, materia }: Pr
             <Grid templateColumns='repeat(3, 1fr)' gap={2} display='flex' alignContent='center' alignItems='center'>
                 <GridItem w='65%' h='100%'>
                     <Image
-                        src={`/imagens/testes/portugues.svg`}
+                        src={`/imagens/testes/${materia}.svg`}
                         width={100}
                         height={100}
                         alt="Picture of the author"
