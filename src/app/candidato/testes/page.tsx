@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   GridItem,
   Grid,
@@ -13,8 +13,39 @@ import MenuLeft from '@/components/menuLeft';
 import Footer from '@/components/footer';
 import CardComponent from '@/components/card';
 
+type Teste = {
+  title: string;
+  description: string;
+  materia: string;
+  nivel: string;
+  color: string;
+}
+
 
 export default function Testes() {
+
+  const listExample = [
+    {
+      title: 'Teste de Português',
+      description: 'Este teste avaliará suas habilidades em compreensão de texto, gramática, vocabulário e redação, com 30 questões de múltipla escolha e 1 redação em até 60 minutos.',
+      materia: 'portugues',
+      nivel: '',
+      color: 'teal.800',
+
+    },
+
+    {
+      title: 'Teste de Matemática',
+      description: 'Este teste avaliará suas habilidades em matemática, cobrindo aritmética, álgebra e geometria, com 30 questões de múltipla escolha em até 60 minutos.',
+      materia: 'matematica',
+      nivel: '',
+      color: 'teal.800',
+
+    },
+  ];
+  const [testesList, setTestList] = useState<Teste[]>(listExample);
+
+  //setTestList(listExample);
 
   return (
     <Grid
@@ -36,7 +67,14 @@ export default function Testes() {
         <Container>
           <Stack spacing={3}>
             <Text fontWeight='600'>Meus testes</Text>
-            <CardComponent color='teal.800' />
+            {
+              testesList.map((teste: Teste, index: number) => {
+                return (
+                  <CardComponent key={index} title={teste.title} description={teste.description} color={teste.color} materia={teste.materia} nivel={teste.nivel} />
+                )
+              })
+            }
+
           </Stack>
         </Container>
       </GridItem>
