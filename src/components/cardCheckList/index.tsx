@@ -1,7 +1,8 @@
 'use client'
 import React, { useState } from 'react'
 import ItemCardChecklistComponent from '../itemCardChecklist';
-import { Box, Container, Progress, Stack, Text } from '@chakra-ui/react';
+import { Box, Container, HStack, Progress, Stack, Tag, TagLabel, Text, VStack } from '@chakra-ui/react';
+import EmptyCardChecklistComponent from '../EmptyCardCheckList';
 
 type Check = {
     title: string;
@@ -52,25 +53,40 @@ export default function CardCheckList() {
 
     return (
 
-        <Box bgColor='gray.100' padding={6} height='370px' borderRadius={8}>
-            <Stack spacing={4}>
-                <Stack spacing={2}>
-                    <Text fontWeight='600'>Seja bem vindo, João Silva!</Text>
-                    <Text fontSize='xs'>Você está a poucos passos de completar seus dados.</Text>
-                    <Progress hasStripe value={64} marginY={4} />
-                </Stack>
-                <Stack gap={2} direction='row' width='100%'>
-                    {
-                        checkList.map((check: Check, index: number) => {
-                            return (
-                                <ItemCardChecklistComponent key={index} title={check.title} image={check.image} />
-                            )
-                        })
-                    }
-
-                </Stack>
-
+        <Box bgColor='gray.100' padding={6} height='420px' borderRadius={8}>
+            <Stack spacing={2}>
+                <Text fontWeight='600'>Seja bem vindo, João Silva!</Text>
+                <Text fontSize='xs'>Você está a poucos passos de completar seus dados.</Text>
+                <Progress hasStripe value={64} marginY={4} />
             </Stack>
+
+            <VStack spacing={6} align="flex-start" marginTop={8}>
+                <VStack align="flex-start">
+                    <HStack spacing={4} overflowX="auto">
+
+                        {
+
+                            checkList.map((check: Check, index: number) => {
+                                return (
+                                    <ItemCardChecklistComponent key={index} title={check.title} image={check.image} />
+                                )
+                            })
+                        }
+
+
+
+                    </HStack>
+                </VStack>
+
+            </VStack>
+
+            <Container display='flex' alignItems='center' justifyContent='center'>
+                {checkList.length === 0 &&
+
+                    <EmptyCardChecklistComponent text='Você conquistou o perfil campeão!' description='Parabéns! Seu perfil está completo.' />
+
+                }
+            </Container>
         </Box>
 
     )
