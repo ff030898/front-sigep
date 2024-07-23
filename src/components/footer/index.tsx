@@ -1,20 +1,25 @@
-'use client'
-import React from 'react'
-import {
-  Container,
-  Box,
-  Text
+import React from 'react';
+import { Container, Box, Text } from '@chakra-ui/react';
 
-} from '@chakra-ui/react'
+type FooterProps = {
+  isVisible: boolean;
+}
 
-
-export default function Footer() {
-
+const Footer: React.FC<FooterProps> = ({ isVisible }) => {
   return (
-    <Container display='flex' alignItems='center' justifyContent='center'>
-     <Box pt={4}>
+    <Box
+      bg='teal.700'
+      py={4}
+      mt={8}
+      ml={isVisible ? "200px" : "60px"}
+      transition="margin-left 0.2s"
+      width={`calc(100% - ${isVisible ? "200px" : "60px"})`}
+    >
+      <Container display='flex' alignItems='center' justifyContent='center'>
         <Text color='white'>&copy; Copyright 2024 Todos os direitos reservados por Guiari RH</Text>
-     </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 }
+
+export default Footer;
