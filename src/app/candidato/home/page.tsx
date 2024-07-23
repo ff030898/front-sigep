@@ -7,6 +7,7 @@ import {
 import Header from '@/components/header';
 import MenuLeft from '@/components/menuLeft';
 import Footer from '@/components/footer';
+import CardCheckList from '@/components/cardCheckList';
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false); 
@@ -25,15 +26,13 @@ export default function Home() {
         <Header title='Home' isVisible={isVisible} />
       </GridItem>
       <GridItem pl='2' bg='teal.800' area={'nav'}>
-        <MenuLeft isVisible={false} toggleMenu={function (): void {
-          throw new Error('Function not implemented.');
-        } } />
+        <MenuLeft isVisible={isVisible} toggleMenu={() => setIsVisible(!isVisible)} />
       </GridItem>
       <GridItem pl='2' bg='gray.50' area={'main'} px={10} py={6}>
-        Bem vindo, ao Guiari RH.
+        <CardCheckList />
       </GridItem>
       <GridItem pl='2' bg='teal.800' area={'footer'}>
-        <Footer isVisible={false} />
+        <Footer isVisible={isVisible} />
       </GridItem>
     </Grid>
   );
