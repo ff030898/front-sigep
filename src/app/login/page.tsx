@@ -1,30 +1,41 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  ChakraProvider, Box, Tabs, TabList, Tab, TabPanels, TabPanel, Image
-} from "@chakra-ui/react";
+import { ChakraProvider, Box, Tabs, TabList, Tab, TabPanels, TabPanel, Image } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import FormComponent from './FormComponent';
-import { schema, FormData } from './schema';
+import { candidatoSchema, empresaSchema, CandidatoFormData, EmpresaFormData } from './schema';
+
+// Configuração do Axios
+axios.defaults.baseURL = 'http://localhost:3001'; // URL do seu backend
+axios.defaults.withCredentials = true; // Inclui cookies nas solicitações
 
 const Login: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
-    resolver: zodResolver(schema)
-  });
 
-  const onSubmit = async (data: FormData) => {
-    console.log("Enviando dados para o backend:", data);
-  };
+  const formConfig = selectedTab === 0
+    ? { resolver: zodResolver(candidatoSchema), defaultValues: { email: '', senha: '' } }
+    : { resolver: zodResolver(empresaSchema), defaultValues: { corporateEmail: '', corporatePassword: '' } };
 
-  const renderImage = () => {
-    if (selectedTab === 0) {
-      return <Image src="/imagens/CandidatoLogin.png" alt="Imagem lateral candidato" objectFit="cover" width="100%" height="100%" />;
+  const { register, handleSubmit, formState: { errors } } = useForm<CandidatoFormData | EmpresaFormData>(formConfig);
+
+  const onSubmit = async (data: any) => {
+    try {
+      const response = await axios.post('/auth/login', {
+        emailOrUsername: selectedTab === 0 ? data.email : data.corporateEmail,
+        password: selectedTab === 0 ? data.senha : data.corporatePassword,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('Login successful:', response.data);
+    } catch (error) {
+      console.error('Error logging in:', error);
     }
-    return <Image src="/imagens/loginEmpresa.png" alt="Imagem lateral empresa" objectFit="cover" width="100%" height="100%" />;
   };
 
   return (

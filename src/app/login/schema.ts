@@ -1,8 +1,17 @@
-import * as z from "zod";
+import { z } from 'zod';
 
-export const schema = z.object({
-  email: z.string().email("E-mail inválido").nonempty("E-mail é obrigatório"),
-  senha: z.string().min(6, "Senha deve ter pelo menos 6 caracteres").nonempty("Senha é obrigatória"),
+// Schema para Candidato
+export const candidatoSchema = z.object({
+  email: z.string().email("E-mail inválido"),
+  senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
 });
 
-export type FormData = z.infer<typeof schema>;
+// Schema para Empresa
+export const empresaSchema = z.object({
+  email: z.string().email("E-mail corporativo inválido"),
+  senha: z.string().min(6, "A senha deve ter pelo menos 6 caracteres"),
+});
+
+// Tipos inferidos dos schemas
+export type CandidatoFormData = z.infer<typeof candidatoSchema>;
+export type EmpresaFormData = z.infer<typeof empresaSchema>;
