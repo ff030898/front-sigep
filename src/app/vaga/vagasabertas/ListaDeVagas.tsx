@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Configura a URL base do Axios
-axios.defaults.baseURL = 'http://localhost:3001/';
+axios.defaults.baseURL = 'https://sigep-app-c47680d498bc.herokuapp.com/';
 
 interface Vaga {
   cargo: string;
