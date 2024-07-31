@@ -8,9 +8,7 @@ type FooterProps = {
 const Footer: React.FC<FooterProps> = ({ isVisible }) => {
   return (
     <Box
-      bg='teal.700'
-      py={4}
-      mt={8}
+      bg='teal.800'
       ml={isVisible ? "200px" : "60px"}
       transition="margin-left 0.2s"
       width={`calc(100% - ${isVisible ? "200px" : "60px"})`}

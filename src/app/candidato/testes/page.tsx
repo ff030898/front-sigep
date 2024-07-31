@@ -16,7 +16,7 @@ import CardComponent from '@/components/card';
 type Teste = {
   title: string;
   description: string;
-  materia: string;
+  image: string;
   nivel: string;
   color: string;
 }
@@ -28,7 +28,7 @@ export default function Testes() {
     {
       title: 'Teste de Português',
       description: 'Este teste avaliará suas habilidades em compreensão de texto, gramática, vocabulário e redação, com 30 questões de múltipla escolha e 1 redação em até 60 minutos.',
-      materia: 'portugues',
+      image: '/imagens/testes/portugues.svg',
       nivel: '',
       color: 'teal.800',
 
@@ -37,7 +37,47 @@ export default function Testes() {
     {
       title: 'Teste de Matemática',
       description: 'Este teste avaliará suas habilidades em matemática, cobrindo aritmética, álgebra e geometria, com 30 questões de múltipla escolha em até 60 minutos.',
-      materia: 'matematica',
+      image: '/imagens/testes/matematica.svg',
+      nivel: '',
+      color: 'teal.800',
+
+    },
+    {
+      title: 'Teste de Lógica',
+      description: 'Este teste avaliará suas habilidades em lógica, cobrindo aritmética, álgebra e geometria, com 30 questões de múltipla escolha em até 60 minutos.',
+      image: '/imagens/testes/logica.svg',
+      nivel: '',
+      color: 'teal.800',
+
+    },
+    {
+      title: 'Redação',
+      description: 'A redação para teste de emprego é uma oportunidade única de mostrar ao recrutador quem você é e por que você seria a pessoa perfeita para a vaga.',
+      image: '/imagens/testes/redacao.svg',
+      nivel: '',
+      color: 'teal.800',
+
+    },
+    {
+      title: 'Teste Fit Cultural',
+      description: 'O teste fit cultural avalia se os valores, personalidade e estilo de trabalho do candidato estão alinhados com a cultura da empresa. Leia cada pergunta com atenção e reflita sobre suas experiências e crenças.',
+      image: '/imagens/testes/fit.svg',
+      nivel: '',
+      color: 'teal.800',
+
+    },
+    {
+      title: 'Teste de Inglês',
+      description: ' Leia cada frase em inglês e escolha a tradução correta em português. Marque a resposta que você acredita ser a melhor. Após concluir o teste, compare suas respostas com o gabarito fornecido.',
+      image: '/imagens/testes/ingles.svg',
+      nivel: '',
+      color: 'teal.800',
+
+    },
+    {
+      title: 'Teste de Espanhol',
+      description: ' Leia atentamente cada questão e siga as instruções específicas. Responda todas as questões da melhor forma possível.',
+      image: '/imagens/testes/espanhol.svg',
       nivel: '',
       color: 'teal.800',
 
@@ -72,7 +112,7 @@ export default function Testes() {
             {
               testesList.map((teste: Teste, index: number) => {
                 return (
-                  <CardComponent key={index} title={teste.title} description={teste.description} color={teste.color} materia={teste.materia} nivel={teste.nivel} />
+                  <CardComponent key={index} title={teste.title} description={teste.description} color={teste.color} image={teste.image} nivel={teste.nivel} />
                 )
               })
             }
