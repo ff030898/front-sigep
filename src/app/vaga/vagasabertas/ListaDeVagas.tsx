@@ -87,6 +87,12 @@ const VagasPage: React.FC = () => {
       });
   };
 
+  const numberFormat = (value: number) =>
+    new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+
   return (
     <Container maxW="container.xl" m={0} p={0}>
       <Box>
@@ -168,7 +174,7 @@ const VagasPage: React.FC = () => {
               type={vaga.tipoLocalTrabalho}
               location={vaga.localTrabalho}
               workMode={vaga.tipoLocalTrabalho}
-              salaryRange={`R$${typeof vaga.salario === 'number' ? vaga.salario.toFixed(2) : 'Não informado'}`}
+              salaryRange={`${numberFormat(vaga.salario ? vaga.salario : 0)}`}
             />
           ))}
         </SimpleGrid>

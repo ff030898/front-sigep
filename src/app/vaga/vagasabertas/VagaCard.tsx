@@ -35,11 +35,11 @@ const VagaCard = ({
   salaryRange,
 }: Props) => {
   return (
-    <Box width='359px' p={4} boxShadow='sm' bg='white' borderRadius='md'>
+    <Box width='410px' p={4} boxShadow='sm' bg='white'  border='1px solid #ccc' borderRadius={8}>
       <Flex alignItems='center'>
         <Avatar size='md' name={role} />
         <Box ml='3'>
-          <Text fontWeight='bold'>{role}</Text>
+          <Text width='310px' maxWidth='310px' fontWeight='bold' whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden'>{role}</Text>
           <Text fontSize='sm'>{company}</Text>
         </Box>
       </Flex>

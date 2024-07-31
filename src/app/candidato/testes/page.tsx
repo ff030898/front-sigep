@@ -5,7 +5,9 @@ import {
   Grid,
   Container,
   Text,
-  Stack
+  Stack,
+  Flex,
+  Box
 
 } from '@chakra-ui/react'
 import Header from '@/components/header';
@@ -87,42 +89,38 @@ export default function Testes() {
 
   //setTestList(listExample);
 
-  return (
-    <Grid
-      templateAreas={`"nav header"
-                  "nav main"
-                  "nav footer"`}
-      gridTemplateRows={'60px 1fr 55px'}
-      gridTemplateColumns={'60px 1fr'}
-      h='100vh'
-      gap='0'
-    >
-      <GridItem pl='2' bg='white' area={'header'} borderBottom='1px solid #ddd'>
-        <Header title=' ' isVisible={false} />
-      </GridItem>
-      <GridItem pl='2' bg='teal.800' area={'nav'}>
-        <MenuLeft isVisible={false} toggleMenu={function (): void {
-          throw new Error('Function not implemented.');
-        } } />
-      </GridItem>
-      <GridItem pl='2' bg='gray.50' area={'main'} px={10} py={6}>
-        <Container>
-          <Stack spacing={3}>
-            <Text fontWeight='600'>Meus testes</Text>
-            {
-              testesList.map((teste: Teste, index: number) => {
-                return (
-                  <CardComponent key={index} title={teste.title} description={teste.description} color={teste.color} image={teste.image} nivel={teste.nivel} />
-                )
-              })
-            }
+  const [isVisible, setIsVisible] = useState(false);
 
-          </Stack>
-        </Container>
-      </GridItem>
-      <GridItem pl='2' bg='teal.800' area={'footer'}>
-        <Footer isVisible={false} />
-      </GridItem>
-    </Grid>
+  return (
+    <Flex height="100vh" overflow="hidden">
+      <MenuLeft isVisible={isVisible} toggleMenu={() => setIsVisible(!isVisible)} />
+      <Box flex="1" ml={isVisible ? "200px" : "60px"} transition="margin-left 0.2s" overflow="hidden">
+        <Flex direction="column" height="100vh">
+          <Box flexShrink={0} bg='white' borderBottom='1px solid #ddd'>
+            <Header title='Home' isVisible={isVisible} />
+          </Box>
+          <Box flex="1" overflowY="auto" bg="#f5f5f5">
+            <Box px={10} py={20}>
+              <Container>
+                <Stack spacing={3}>
+                  <Text fontWeight='600'>Meus testes</Text>
+                  {
+                    testesList.map((teste: Teste, index: number) => {
+                      return (
+                        <CardComponent key={index} title={teste.title} description={teste.description} color={teste.color} image={teste.image} nivel={teste.nivel} />
+                      )
+                    })
+                  }
+
+                </Stack>
+              </Container>
+            </Box>
+            <Box bg='teal.800' p={4}>
+              <Footer isVisible={isVisible} />
+            </Box>
+          </Box>
+        </Flex>
+      </Box>
+    </Flex>
   );
 }
