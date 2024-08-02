@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import FormComponent from './FormComponent';
-import { candidatoSchema, empresaSchema, CandidatoFormData, EmpresaFormData } from './schema';
+import { candidatoSchema, empresaSchema, parceiroSchema, CandidatoFormData, EmpresaFormData, ParceiroFormData } from './schema';
 
 // Configuração do Axios
 axios.defaults.baseURL = 'http://localhost:3001'; // URL do seu backend
@@ -17,15 +17,17 @@ const Login: React.FC = () => {
 
   const formConfig = selectedTab === 0
     ? { resolver: zodResolver(candidatoSchema), defaultValues: { email: '', senha: '' } }
-    : { resolver: zodResolver(empresaSchema), defaultValues: { corporateEmail: '', corporatePassword: '' } };
+    : selectedTab === 1
+    ? { resolver: zodResolver(empresaSchema), defaultValues: { corporateEmail: '', corporatePassword: '' } }
+    : { resolver: zodResolver(parceiroSchema), defaultValues: { partnerEmail: '', partnerPassword: '' } };
 
-  const { register, handleSubmit, formState: { errors } } = useForm<CandidatoFormData | EmpresaFormData>(formConfig);
+  const { register, handleSubmit, formState: { errors } } = useForm<CandidatoFormData | EmpresaFormData | ParceiroFormData>(formConfig);
 
   const onSubmit = async (data: any) => {
     try {
       const response = await axios.post('/auth/login', {
-        emailOrUsername: selectedTab === 0 ? data.email : data.corporateEmail,
-        password: selectedTab === 0 ? data.senha : data.corporatePassword,
+        emailOrUsername: selectedTab === 0 ? data.email : selectedTab === 1 ? data.corporateEmail : data.partnerEmail,
+        password: selectedTab === 0 ? data.senha : selectedTab === 1 ? data.corporatePassword : data.partnerPassword,
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -56,6 +58,7 @@ const Login: React.FC = () => {
             <TabList mb="1em">
               <Tab _selected={{ color: 'blue.500', borderBottom: '2px solid', borderColor: 'blue.500' }} color="gray.500">Sou um candidato</Tab>
               <Tab _selected={{ color: 'blue.500', borderBottom: '2px solid', borderColor: 'blue.500' }} color="gray.500">Sou uma empresa</Tab>
+              <Tab _selected={{ color: 'blue.500', borderBottom: '2px solid', borderColor: 'blue.500' }} color="gray.500">Sou um parceiro</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -63,6 +66,9 @@ const Login: React.FC = () => {
               </TabPanel>
               <TabPanel>
                 <FormComponent tipo="empresa" onSubmit={onSubmit} errors={errors} register={register} handleSubmit={handleSubmit} />
+              </TabPanel>
+              <TabPanel>
+                <FormComponent tipo="parceiro" onSubmit={onSubmit} errors={errors} register={register} handleSubmit={handleSubmit} />
               </TabPanel>
             </TabPanels>
           </Tabs>
@@ -77,8 +83,20 @@ const Login: React.FC = () => {
           bg="orange.100"
         >
           <Image
-            src={selectedTab === 0 ? "/imagens/CandidatoLogin.png" : "/imagens/loginEmpresa.png"}
-            alt={selectedTab === 0 ? "Imagem lateral candidato" : "Imagem lateral empresa"}
+            src={
+              selectedTab === 0
+                ? "/imagens/CandidatoLogin.png"
+                : selectedTab === 1
+                ? "/imagens/loginEmpresa.png"
+                : "/imagens/imagemParceiroLogin.png"
+            }
+            alt={
+              selectedTab === 0
+                ? "Imagem lateral candidato"
+                : selectedTab === 1
+                ? "Imagem lateral empresa"
+                : "Imagem lateral parceiro" 
+            }
             objectFit="cover"
             width="100%"
             height="100%"

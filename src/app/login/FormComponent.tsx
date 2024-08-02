@@ -23,7 +23,7 @@ const FormComponent: React.FC<FormComponentProps> = ({ tipo, onSubmit, errors, r
     <Button colorScheme="red" width="100%" leftIcon={<Image src="/imagens/googleLogo.png" alt="Google" />}>
       Entrar com Google
     </Button>
-    {tipo === "candidato" && (
+    {(tipo === "candidato" || tipo === "parceiro") && (
       <Button colorScheme="blue" width="100%" leftIcon={<Image src="/imagens/linkeLogo.png" alt="LinkedIn" />}>
         Entrar com LinkedIn
       </Button>
@@ -46,23 +46,36 @@ const FormComponent: React.FC<FormComponentProps> = ({ tipo, onSubmit, errors, r
           {errors.senha && <Text color="red.500">{errors.senha.message?.toString()}</Text>}
         </FormControl>
       </>
+    ) : tipo === "empresa" ? (
+      <>
+        <FormControl isInvalid={!!errors.email}>
+          <FormLabel>E-mail corporativo</FormLabel>
+          <Input placeholder="exemplo@empresa.com" {...register("email")} />
+          {errors.email && <Text color="red.500">{errors.email.message?.toString()}</Text>}
+        </FormControl>
+        <FormControl isInvalid={!!errors.senha}>
+          <FormLabel>Senha corporativa</FormLabel>
+          <Input type="password" placeholder="********" {...register("senha")} />
+          {errors.senha && <Text color="red.500">{errors.senha.message?.toString()}</Text>}
+        </FormControl>
+      </>
     ) : (
       <>
-        <FormControl isInvalid={!!errors.corporateEmail}>
-          <FormLabel>E-mail corporativo</FormLabel>
-          <Input placeholder="exemplo@empresa.com" {...register("corporateEmail")} />
-          {errors.corporateEmail && <Text color="red.500">{errors.corporateEmail.message?.toString()}</Text>}
+        <FormControl isInvalid={!!errors.email}>
+          <FormLabel>E-mail do parceiro</FormLabel>
+          <Input placeholder="exemplo@parceiro.com" {...register("email")} />
+          {errors.email && <Text color="red.500">{errors.email.message?.toString()}</Text>}
         </FormControl>
-        <FormControl isInvalid={!!errors.corporatePassword}>
-          <FormLabel>Senha corporativa</FormLabel>
-          <Input type="password" placeholder="********" {...register("corporatePassword")} />
-          {errors.corporatePassword && <Text color="red.500">{errors.corporatePassword.message?.toString()}</Text>}
+        <FormControl isInvalid={!!errors.senha}>
+          <FormLabel>Senha do parceiro</FormLabel>
+          <Input type="password" placeholder="********" {...register("senha")} />
+          {errors.senha && <Text color="red.500">{errors.senha.message?.toString()}</Text>}
         </FormControl>
       </>
     )}
     <Button colorScheme="orange" type="submit" width="100%">Entrar</Button>
     <Text fontSize={{ base: "xs", md: "sm" }} textAlign="center">
-      Não tem uma conta? <Link color="blue.500" href={tipo === "candidato" ? "http://localhost:4000/cadastro/candidato" : "http://localhost:4000/cadastro/empresa"}>Cadastre-se</Link>
+      Não tem uma conta? <Link color="blue.500" href={tipo === "candidato" ? "http://localhost:4000/cadastro/candidato" : tipo === "empresa" ? "http://localhost:4000/cadastro/empresa" : "http://localhost:4000/cadastro/parceiro"}>Cadastre-se</Link>
     </Text>
     <Text fontSize={{ base: "xx-small", md: "xs" }} textAlign="center" mt={4}>
       Ao usar este site, você concorda com nossos <Link color="blue.500" href="#">Termos de Serviço</Link> e <Link color="blue.500" href="#">Política de Privacidade</Link>.
