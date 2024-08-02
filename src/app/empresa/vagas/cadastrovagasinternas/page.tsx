@@ -4,7 +4,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import Etapa1 from './etapa1';
 import Etapa2 from './etapa2';
 import Etapa3 from './etapa3';
-import Etapa4 from './etapa4';  // Importando a nova etapa
+import Etapa4 from './etapa4';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import MenuLeft from '@/components/menuLeft';
