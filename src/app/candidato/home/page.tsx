@@ -24,10 +24,10 @@ export default function Home() {
           <Box flexShrink={0} bg='white' borderBottom='1px solid #ddd'>
             <Header title='Home' isVisible={isVisible} />
           </Box>
-          <Box flex="1" overflowY="auto" bg='gray.50'>
-            <Box px={10} py={6}>
+          <Box flex="1" overflowY="auto" bg="#f5f5f5">
+            <Box px={10} py={20}>
               <CardCheckList />
-              <Container maxW="container.xl" py={4}>
+              <Container maxW="container.xl">
                 <Box mt={8}>
                   <ListaDeVagas />
                 </Box>

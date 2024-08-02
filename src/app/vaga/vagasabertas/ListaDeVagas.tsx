@@ -87,45 +87,33 @@ const VagasPage: React.FC = () => {
       });
   };
 
+  const numberFormat = (value: number) =>
+    new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+
   return (
-    <Container maxW="container.xl" py={4}>
-      <Box mt={8}>
-        <Text fontSize='xl' fontWeight='bold' mb={4}>Vagas de interesse</Text>
-        <SimpleGrid columns={{ sm: 1, md: 3 }} spacing={6}>
-          {vagas.map((vaga, index) => (
-            <VagaCard
-              key={index}
-              role={vaga.cargo}
-              company={vaga.empresa?.nome || 'Empresa não definida'}
-              status={vaga.status}
-              level={vaga.nivelExperiencia}
-              type={vaga.tipoLocalTrabalho}
-              location={vaga.localTrabalho}
-              workMode={vaga.tipoLocalTrabalho}
-              salaryRange={`R$${typeof vaga.salario === 'number' ? vaga.salario.toFixed(2) : 'Não informado'}`}
-            />
-          ))}
-        </SimpleGrid>
-      </Box>
-      <Box mt={8}>
+    <Container maxW="container.xl" m={0} p={0}>
+      <Box>
         <Text fontSize='xl' fontWeight='bold' mb={4}>Pesquisar vagas</Text>
         <Flex gap={4} alignItems="center" position="relative">
-          <Input 
-            placeholder='Cargo' 
+          <Input
+            placeholder='Cargo'
             value={filters.role || ''}
             onChange={(e) => setFilters({ ...filters, role: e.target.value })}
           />
-          <Input 
-            placeholder='Cidade, estado ou região' 
+          <Input
+            placeholder='Cidade, estado ou região'
             value={filters.location || ''}
             onChange={(e) => setFilters({ ...filters, location: e.target.value })}
           />
           <Button
             leftIcon={<SearchIcon />}
             fontSize='16px'
-            width="300px"
+            width="350px"
             height="40px"
-            padding="4px 7px"
+            padding="10px"
             gap="10px"
             colorScheme='orange'
             onClick={handleApplyFilters}
@@ -153,7 +141,7 @@ const VagasPage: React.FC = () => {
           )}
         </Flex>
         {filteredVagas.length > 0 && (
-          <Box mt={8}>
+          <Box>
             <SimpleGrid columns={{ sm: 1, md: 3 }} spacing={6}>
               {filteredVagas.map((vaga, index) => (
                 <VagaCard
@@ -172,6 +160,26 @@ const VagasPage: React.FC = () => {
           </Box>
         )}
       </Box>
+
+      <Box mt={8}>
+        <Text fontSize='xl' fontWeight='bold' mb={4}>Vagas de interesse</Text>
+        <SimpleGrid columns={{ sm: 1, md: 3 }} spacing={6}>
+          {vagas.map((vaga, index) => (
+            <VagaCard
+              key={index}
+              role={vaga.cargo}
+              company={vaga.empresa?.nome || 'Empresa não definida'}
+              status={vaga.status}
+              level={vaga.nivelExperiencia}
+              type={vaga.tipoLocalTrabalho}
+              location={vaga.localTrabalho}
+              workMode={vaga.tipoLocalTrabalho}
+              salaryRange={`${numberFormat(vaga.salario ? vaga.salario : 0)}`}
+            />
+          ))}
+        </SimpleGrid>
+      </Box>
+
     </Container>
   );
 };

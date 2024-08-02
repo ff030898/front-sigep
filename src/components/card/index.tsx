@@ -2,9 +2,6 @@
 import React from 'react'
 import {
     Text,
-    Card,
-    CardBody,
-    Box,
     Button,
     Stack,
     Grid,
@@ -18,20 +15,20 @@ import Image from 'next/image'
 type Props = {
     title: string;
     description: string;
-    materia: string;
+    image: string;
     nivel: string;
     color: string;
   }
 
 
-export default function CardComponent({ title, description, color, materia }: Props) {
+export default function CardComponent({ title, description, color, image }: Props) {
 
     return (
         <Container bgColor={color} w='100%' p={6} borderRadius={8}>
             <Grid templateColumns='repeat(3, 1fr)' gap={2} display='flex' alignContent='center' alignItems='center'>
                 <GridItem w='65%' h='100%'>
                     <Image
-                        src={`/imagens/testes/portugues.svg`}
+                        src={image}
                         width={100}
                         height={100}
                         alt="Picture of the author"
@@ -46,7 +43,7 @@ export default function CardComponent({ title, description, color, materia }: Pr
 
                 </GridItem>
                 <GridItem w='25%' h='100%'>
-                    <Button bgColor='orange.500' color='white'>Iniciar Teste</Button>
+                    <Button colorScheme='orange'>Iniciar Teste</Button>
                 </GridItem>
             </Grid>
 
